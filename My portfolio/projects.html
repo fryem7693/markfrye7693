@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mark Frye | Projects</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Load Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+</head>
+
+<body>
+
+  <canvas id="bg"></canvas>
+
+  <div class="content">
+    <h1>Projects</h1>
+    <p>Backend-focused systems and AI projects.</p>
+      <p>
+       <div class="projects-buttons">
+
+  <a class="project-btn" href="projects/projects.html">
+    Distributed URL Shortener
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    Real-Time Chat System
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    AI Resume Matching Engine
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    Event-Driven Order Processing System
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    Rate-Limited API Gateway
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    Search Engine Backend
+  </a>
+
+  <a class="project-btn" href="projects/projects.html">
+    Distributed File Storage System
+  </a>
+
+</div>
+
+
+    <br><br>
+
+    <a href="../index.html" class="btn">
+      Back to Home
+    </a>
+
+  </div>
+
+  <script>
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: document.querySelector("#bg"),
+      alpha: true,
+    });
+
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    camera.position.z = 5;
+
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 1500;
+    const starPositions = [];
+
+    for (let i = 0; i < starCount; i++) {
+      starPositions.push(
+        (Math.random() - 0.5) * 500,
+        (Math.random() - 0.5) * 500,
+        (Math.random() - 0.5) * 500
+      );
+    }
+
+    starGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(starPositions, 3)
+    );
+
+    const starMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.7,
+      transparent: true,
+      opacity: 0.3
+    });
+
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      stars.rotation.y += 0.0003;
+      stars.rotation.x += 0.0001;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+
+</body>
+</html>
+
+
